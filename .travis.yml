@@ -6,8 +6,12 @@ fail_fast: true
 install:
   - python setup.py install
   - pip install pycodestyle
+  - pip install coveralls
 before_install:
   - pip install --upgrade pip
 script:
   - find . -name \*.py -exec pycodestyle --ignore=E402 {} +
   - python -m unittest -v
+  - coverage run -m unittest -v
+after_success:
+  - coveralls
