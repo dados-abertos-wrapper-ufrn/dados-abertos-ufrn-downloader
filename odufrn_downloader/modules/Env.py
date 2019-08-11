@@ -16,18 +16,25 @@ class Env(ABC):
         a url para a página de ações da API.
     """
 
+    """Constante com mensagens de erros"""
+    MSG_ERRORS = {
+        'download_error': (
+            "Ocorreu algum erro durante o download do pacote."
+            "Verifique sua conexão, o nome do conjunto de dados"
+            "e tente novamente."
+        ),
+        'none_package': 'Nenhum pacote foi encontrado',
+    }
+
     def __init__(self):
         self.url_base = 'http://dados.ufrn.br/'
         self.url_action = self.url_base + 'api/action/'
 
-    def _print_exception(self, ex: Exception):
+    def _print_exception(self, ex: Exception,
+                         msg: str = MSG_ERRORS['download_error']):
         """Imprime mensagem padrão para exceções."""
         print('\033[91m{}\033[0m'.format(ex))
-        print(
-            "Ocorreu algum erro durante o download do pacote. "
-            "Verifique sua conexão, o nome do conjunto de dados "
-            "e tente novamente."
-        )
+        print(msg)
 
     def _print_list(self, name: str, variable: list):
         """Mostra na tela a lista desejada."""
