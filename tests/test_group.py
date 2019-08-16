@@ -26,8 +26,11 @@ class Group(unittest.TestCase):
         """Verifica se digitando um nome errado de um grupo
         consegue-se lançar exceção de grupo não encontrado."""
         group = 'despesas-e-orcam'
-        fun = self.ufrn_data.get_packages_group(group)
-        self.assertTrue("não foi encontrado" in (input_value(lambda: fun)))
+        self.assertTrue(
+            "não foi encontrado" in (
+                input_value(lambda: self.ufrn_data.get_packages_group(group))
+            )
+        )
 
     def test_can_download_group(self):
         """Verifica se baixa-se arquivos de um grupo."""
