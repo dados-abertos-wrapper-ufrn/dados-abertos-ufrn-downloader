@@ -55,7 +55,33 @@ ufrn_data.load_groups()
 ufrn_data.available_groups
 ```
 
-## list_groups
+## print_files_from_group
+Imprime no terminal a lista de arquivos referentes ao grupo de entrada.
+Atualmente usa-se o cálculo de Levenshtein para verificar a similaridade
+entre a entrada e os nomes dos grupo.
+
+**Parâmetros**:
+
+| Parâmetro | Tipo | Valor padrão | Descrição |
+| --------- | ---- | ------------ | --------- |
+| `name` | `str` | - | Nome do grupo que será buscado. |
+
+**Exemplo**:
+```python
+from odufrn_downloader import ODUFRNDownloader
+ufrn_data = ODUFRNDownloader()
+
+# Listar arquivos do pacote discentes
+ufrn_data.print_files_from_group('processos')
+
+# Output:
+# Processos de 2019
+# Processos de 2018
+# ...
+# Dicionário de Dados - Processos Administrativos
+```
+
+## print_groups
 Lista os grupos de conjuntos de dados. Apresenta os elementos presentes na lista `available_groups`.
 
 **Exemplo**:
@@ -64,7 +90,7 @@ from odufrn_downloader import ODUFRNDownloader
 ufrn_data = ODUFRNDownloader()
 
 # Apresentando a lista de grupos de pacotes disponíveis
-ufrn_data.list_groups()
+ufrn_data.print_groups()
 ```
 
 ## search_related_groups
@@ -77,6 +103,7 @@ entre a entrada e os nomes dos grupos.
 | Parâmetro | Tipo | Valor padrão | Descrição |
 | --------- | ---- | ------------ | --------- |
 | `keyword` | `str` | - | Palavra-chave com a qual será feita a busca. |
+| `simple_filter` | `bool` | - | Indica o uso de um filtro mais simples que o Levenshtein. |
 
 **Exemplo**:
 ```python
@@ -86,7 +113,14 @@ ufrn_data = ODUFRNDownloader()
 # Procurar grupos relacionados a pesquisa
 list_groups = ufrn_data.search_related_groups('pesquis')
 print(list_groups)
-
+# Output:
+# ['pesquisa']
+list_groups = ufrn_data.search_related_groups('pesq')
+print(list_groups)
+# Output:
+# []
+list_groups = ufrn_data.search_related_groups('pesq', simple_filter=True)
+print(list_groups)
 # Output:
 # ['pesquisa']
 ```

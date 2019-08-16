@@ -25,7 +25,7 @@ class Group(Package):
         """Atualiza lista de grupos de pacotes disponíveis."""
         self.available_groups = self._load_list('group_list')
 
-    def list_groups(self):
+    def print_groups(self):
         """Lista os grupos de pacotes."""
         self._print_list("grupos de dados", self.available_groups)
 
@@ -48,7 +48,7 @@ class Group(Package):
         return response['packages']
 
     def download_group(self, name: str, path: str = os.getcwd(),
-                       dictionary: bool = True):
+                       dictionary: bool = True, years: list = None):
         """Exibe grupo de pacotes de acordo com seu nome
         e baixa-os em pastas com o nome do respectivo
         grupo de dados.
@@ -59,6 +59,9 @@ class Group(Package):
         ----------
         name: str
             nome do grupo.
+        years: list
+            define os anos dos dados que serão baixados, se existir
+            realiza-se o download.
         path: str
             o caminho da pasta onde serão adicionados os arquivos
             (por padrão, a pasta atual).
@@ -67,8 +70,8 @@ class Group(Package):
         """
 
         # Checa se o grupo está disponível
-        if not (name in self.available_groups):
-            print("O grupo de pacotes \"{}\" não foi encontrado.".format(name))
+        if not (name in self.available_groups) and self.warnings:
+            self._print_not_found(name, 'Grupo')
             return
 
         groups = self._request_get(self.url_group + name)
@@ -76,13 +79,13 @@ class Group(Package):
 
         try:
             for package in groups['packages']:
-                self.download_package(package, path, dictionary)
+                self.download_package(package, path, dictionary, years)
 
         except Exception as ex:
             self._print_exception(ex)
 
-    def download_groups(self, groups: list,
-                        path: str = os.getcwd(), dictionary: bool = True):
+    def download_groups(self, groups: list, path: str = os.getcwd(),
+                        dictionary: bool = True, years: list = None):
         """Exibe os grupos de pacotes de acordo com seu nome
         e baixa-os em pastas com o nome do respectivo
         grupo de dados.
@@ -93,6 +96,9 @@ class Group(Package):
         ----------
         groups: list
             lista com os nomes dos grupos desejados.
+        years: list
+            define os anos dos dados que serão baixados, se existir
+            realiza-se o download.
         path: str
             o caminho da pasta onde serão adicionados os arquivos
             (por padrão, a pasta atual).
@@ -101,7 +107,7 @@ class Group(Package):
         """
 
         for group in groups:
-            self.download_group(group, path, dictionary)
+            self.download_group(group, path, dictionary, years)
 
     def search_related_groups(self, keyword: str,
                               simple_filter: bool = False) -> list:
@@ -124,10 +130,25 @@ class Group(Package):
             related = self.search_related(keyword, self.available_groups)
 
         # Imprime exceção se não houver grupos similares
-        if not len(related):
-            print(
-                "Não há nenhum grupo de conjunto de dados"
-                " semelhante a \"{}\".".format(keyword)
-            )
+        if not len(related) and self.warnings:
+            self._print_not_relation(keyword, 'Grupo')
 
         return related
+
+    def print_files_from_group(self, name: str):
+        """Printa os arquivos dos pacotes de um grupo.
+
+        > Exemplo: print_files_from_group('processos')
+
+        Parâmetros
+        ----------
+        name: str
+            nome do recurso a ser pesquisado.
+        """
+        try:
+            for resource in self.get_packages_group(name):
+                self.print_files_from_package(resource)
+        except TypeError as e:
+            self._print_exception(
+                e, self.str_related(self.search_related_packages(name))
+            )
