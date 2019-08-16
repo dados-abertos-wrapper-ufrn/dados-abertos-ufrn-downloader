@@ -2,6 +2,7 @@ from .utils import *
 import os
 import shutil
 
+
 class Package(unittest.TestCase):
     def setUp(self):
         """Inicia novo objeto em todo os testes."""
@@ -24,7 +25,7 @@ class Package(unittest.TestCase):
         self.assertTrue(len(list_groups) == 3)
         list_groups = self.ufrn_data.search_related_packages('disc')
         self.assertTrue(len(list_groups) == 0)
-    
+
     def test_can_download_package(self):
         """Verifica se baixa-se arquivos de um grupo"""
         self.ufrn_data.download_package('telefones', './tmp')
@@ -33,13 +34,14 @@ class Package(unittest.TestCase):
             shutil.rmtree('./tmp')
 
     def test_can_download_packages(self):
-        self.ufrn_data.download_packages(['telefones','unidades-academicas'], './tmp')
-        self.assertTrue(
-            os.path.exists('./tmp/telefones') and os.path.exists('./tmp/unidades-academicas')
+        self.ufrn_data.download_packages(
+            ['telefones', 'unidades-academicas'], './tmp'
         )
+        telefone_path = os.path.exists('./tmp/telefones')
+        unidades_path = os.path.exists('./tmp/unidades-academicas')
+        self.assertTrue(telefone_path and unidades_path)
         if os.path.exists('./tmp'):
             shutil.rmtree('./tmp')
-
 
     def test_can_print_files_from_package(self):
         """Verifica se os arquivos de um pacote podem ser impressos na tela."""

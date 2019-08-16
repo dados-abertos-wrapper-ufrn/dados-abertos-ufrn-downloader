@@ -22,14 +22,13 @@ class Group(unittest.TestCase):
         group = 'extensao'
         self.assertTrue(len(self.ufrn_data.get_packages_group(group)) > 0)
 
-    def test_can_raise_exception_on_get_packages_group(self):    
+    def test_can_raise_exception_on_get_packages_group(self):
         """Verifica se digitando um nome errado de um grupo
         consegue-se lançar exceção de grupo não encontrado."""
         group = 'despesas-e-orcam'
-        fun = lambda : self.ufrn_data.get_packages_group(group)
-        print(input_value(fun))
-        self.assertTrue("não foi encontrado" in (input_value(fun)))
-    
+        fun = self.ufrn_data.get_packages_group(group)
+        self.assertTrue("não foi encontrado" in (input_value(lambda: fun)))
+
     def test_can_download_group(self):
         """Verifica se baixa-se arquivos de um grupo."""
         self.ufrn_data.download_group('extensao', './tmp')
@@ -39,9 +38,11 @@ class Group(unittest.TestCase):
 
     def test_can_download_groups(self):
         """Verifica se baixa-se arquivos de vários grupos."""
-        self.ufrn_data.download_groups(['biblioteca','extensao'], './tmp')
+        self.ufrn_data.download_groups(['biblioteca', 'extensao'], './tmp')
+        path_extensao = os.path.exists('./tmp/extensao')
+        path_biblioteca = os.path.exists('./tmp/biblioteca')
         self.assertTrue(
-            os.path.exists('./tmp/extensao') and os.path.exists('./tmp/biblioteca')
+            path_extensao and path_biblioteca
         )
         if os.path.exists('./tmp'):
             shutil.rmtree('./tmp')

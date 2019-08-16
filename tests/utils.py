@@ -14,6 +14,7 @@ def input_value(fun):
     sys.stdout = sys.__stdout__
     return capturedOutput.getvalue()
 
+
 def assert_console(fun):
     """Recebe função que printa algo na tela e realiza assert
     que verifica se foi printado."""
