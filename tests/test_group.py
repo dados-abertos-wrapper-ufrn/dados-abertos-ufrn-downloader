@@ -31,14 +31,20 @@ class Group(unittest.TestCase):
         self.assertTrue("não foi encontrado" in (input_value(fun)))
     
     def test_can_download_group(self):
-        """Verifica se baixa-se arquivos de um grupo"""
+        """Verifica se baixa-se arquivos de um grupo."""
         self.ufrn_data.download_group('extensao', './tmp')
         self.assertTrue(os.path.exists('./tmp/extensao'))
         if os.path.exists('./tmp'):
             shutil.rmtree('./tmp')
 
     def test_can_download_groups(self):
-        pass
+        """Verifica se baixa-se arquivos de vários grupos."""
+        self.ufrn_data.download_groups(['biblioteca','extensao'], './tmp')
+        self.assertTrue(
+            os.path.exists('./tmp/extensao') and os.path.exists('./tmp/biblioteca')
+        )
+        if os.path.exists('./tmp'):
+            shutil.rmtree('./tmp')
 
     def test_can_search_groups(self):
         """Verifica se a procura por grupos está funcionando."""
