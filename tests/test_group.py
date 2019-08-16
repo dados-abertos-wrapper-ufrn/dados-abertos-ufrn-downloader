@@ -1,6 +1,4 @@
 from .utils import *
-import os
-import shutil
 
 
 class Group(unittest.TestCase):

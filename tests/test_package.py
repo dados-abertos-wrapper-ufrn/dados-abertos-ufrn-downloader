@@ -1,6 +1,4 @@
 from .utils import *
-import os
-import shutil
 
 
 class Package(unittest.TestCase):
@@ -53,4 +51,13 @@ class Package(unittest.TestCase):
         """Verifica se o tratamento de erro com o Levenshtein funciona."""
         assert_console(
             lambda: self.ufrn_data.print_files_from_package('discente')
+        )
+
+    def test_can_print_not_relation(self):
+        """Verifica se imprime não haver relação de pacote."""
+        self.ufrn_data.warnings = True
+        assert_console(
+            lambda: self.ufrn_data.search_related_packages(
+                'asudsada', True, True
+            )
         )

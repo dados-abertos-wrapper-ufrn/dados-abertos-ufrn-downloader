@@ -28,3 +28,10 @@ class Tag(unittest.TestCase):
         expected = ['cursos-de-graduacao', 'discentes', 'turmas',
                     'cursos-ufrn', 'estruturas-curriculares']
         self.assertTrue(sorted(packages) == sorted(expected))
+
+    def test_can_download_tags(self):
+        """Verifica se baixa-se arquivos de tags."""
+        self.ufrn_data.download_packages_by_tag('materiais', './tmp')
+        self.assertTrue(os.path.exists('./tmp/acervo-biblioteca'))
+        if os.path.exists('./tmp'):
+            shutil.rmtree('./tmp')

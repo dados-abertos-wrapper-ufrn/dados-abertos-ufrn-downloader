@@ -1,7 +1,5 @@
 from .utils import *
 import tempfile
-import os
-import shutil
 
 
 class Group(unittest.TestCase):
