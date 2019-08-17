@@ -16,8 +16,6 @@ class YearsMixin:
         ----------
         bool
             True se o ano foi encontrado no nome do pacote se não false."""
-        if years is None:
-            return True
 
         if years:
             for _, year in enumerate(years):
