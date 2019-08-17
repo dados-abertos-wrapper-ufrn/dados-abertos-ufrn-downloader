@@ -151,7 +151,7 @@ ufrn_data.print_files_from_package('discentes')
 ```
 
 ## print_packages
-Lista os pacotes de dados. Apresenta os elementos presentes na lista `available_packages`.
+Imprime os pacotes de dados. Apresenta os elementos presentes na lista `available_packages`.
 
 **Exemplo**:
 ```python

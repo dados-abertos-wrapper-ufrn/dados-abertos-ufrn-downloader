@@ -16,7 +16,7 @@ ufrn_data.available_tags
 ```
 
 ## print_tags
-Lista as etiquetas disponíveis. Apresenta os elementos presentes na lista `available_tags`.
+Imprime as etiquetas disponíveis. Apresenta os elementos presentes na lista `available_tags`.
 
 **Exemplo**:
 ```python

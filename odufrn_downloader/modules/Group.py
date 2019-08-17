@@ -26,11 +26,11 @@ class Group(Package):
         self.available_groups = self._load_list('group_list')
 
     def print_groups(self):
-        """Lista os grupos de pacotes."""
+        """Imprime os grupos de pacotes."""
         self._print_list("grupos de dados", self.available_groups)
 
     def get_packages_group(self, name: str):
-        """Lista os packages que possuem no grupo
+        """Imprime os packages que possuem no grupo
 
         Parâmetros
         ----------

@@ -82,7 +82,7 @@ ufrn_data.print_files_from_group('processos')
 ```
 
 ## print_groups
-Lista os grupos de conjuntos de dados. Apresenta os elementos presentes na lista `available_groups`.
+Imprime os grupos de conjuntos de dados. Apresenta os elementos presentes na lista `available_groups`.
 
 **Exemplo**:
 ```python

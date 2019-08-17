@@ -1,7 +1,5 @@
-
-
 class YearsMixin:
-    """ Mixin que adiciona métodos relacionados a filtragem
+    """Mixin que adiciona métodos relacionados a filtragem
     de pacotes e grupos por anos"""
 
     def year_find(self, package_name: str, years: list) -> bool:
@@ -21,9 +19,8 @@ class YearsMixin:
         if years is None:
             return True
 
-        year_find = False
         if years:
             for _, year in enumerate(years):
                 if str(year) in package_name:
-                    year_find = True
-        return year_find
+                    return True
+        return False

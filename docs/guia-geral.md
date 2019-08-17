@@ -21,9 +21,9 @@ Abaixo estão listados os métodos disponíveis no pacote:
 | `load_tags` | Atualiza lista de etiquetas disponíveis. |
 | `print_files_from_package` | Imprime no terminal a lista de arquivos referentes ao pacote de entrada. |
 | `print_files_from_group` | Imprime no terminal a lista de arquivos referentes ao grupo de entrada. |
-| `print_packages` | Lista os pacotes de dados. |
-| `print_groups` | Lista os grupos de conjuntos de dados. |
-| `print_tags` | Lista as etiquetas. |
+| `print_packages` | Imprime os pacotes de dados. |
+| `print_groups` | Imprime os grupos de conjuntos de dados. |
+| `print_tags` | Imprime as etiquetas. |
 | `search_by_tag` | Retorna uma lista de pacotes de dados relacionados a uma etiqueta. |
 | `search_related_packages` | Retorna uma lista de pacotes de dados relacionados a uma entrada. |
 | `search_related_groups` | Retorna uma lista de grupos de conjuntos de dados relacionados a uma entrada. |

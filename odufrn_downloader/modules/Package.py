@@ -31,7 +31,7 @@ class Package(Env, FilterMixin):
         self.available_packages = self._load_list('package_list')
 
     def print_packages(self):
-        """Lista os conjuntos de dados."""
+        """Imprime os conjuntos de dados."""
         self._print_list("pacotes de dados", self.available_packages)
 
     def download_package(self, name: str, path: str = os.getcwd(),
@@ -55,7 +55,6 @@ class Package(Env, FilterMixin):
             define os anos dos dados que serão baixados, se existir
             realiza-se o download.
         """
-
         # Checa se o pacote está disponível
         if not (name in self.available_packages) and self.warnings:
             self._print_not_found(name, 'Pacote')
@@ -66,19 +65,10 @@ class Package(Env, FilterMixin):
 
         try:
             for resource in response['resources']:
-                year_find = self.year_find(resource['name'], years)
-
-                if not dictionary and 'Dicion' in resource['name']:
-                    continue
-
-                if years is None or year_find:
-                    print("Baixando {}...".format(resource['name']))
-                    file_path = '{}/{}.{}'.format(
-                        path, resource['name'], resource['format'].lower()
-                    )
-
-                    with open(file_path, 'wb') as f:
-                        f.write(requests.get(resource['url']).content)
+                if 'Dicion' in resource['name'] and dictionary:
+                    self._download(path, resource)
+                if years is None or self.year_find(resource['name'], years):
+                    self._download(path, resource)
         except Exception as ex:
             self._print_exception(ex)
 
@@ -168,7 +158,7 @@ class Package(Env, FilterMixin):
         )
 
     def download_packages_by_tag(self, tag: str, path: str = os.getcwd()):
-        """ Baixa pacotes pertencentes a uma etiqueta.
+        """Baixa pacotes pertencentes a uma etiqueta.
 
         Parâmetros
         ----------
@@ -184,7 +174,7 @@ class Package(Env, FilterMixin):
         self.download_packages(packages, path)
 
     def print_files_from_package(self, name: str):
-        """Printa os arquivos do pacote.
+        """Imprime os arquivos do pacote.
 
         Parâmetros
         ----------
@@ -199,3 +189,22 @@ class Package(Env, FilterMixin):
             self._print_exception(
                 e, self.str_related(self.search_related_packages(name))
             )
+
+    def _download(self, path: str, resource):
+        """Baixa o arquivo desejado e o coloca na pasta desejada
+
+        > Exemplo: _download('acervo-biblioteca')
+
+        Parâmetros
+        ----------
+        path: str
+            o caminho da pasta onde serão adicionados os arquivos
+            (por padrão, a pasta atual).
+        """
+        print("Baixando {}...".format(resource['name']))
+        file_path = '{}/{}.{}'.format(
+            path, resource['name'], resource['format'].lower()
+        )
+
+        with open(file_path, 'wb') as f:
+            f.write(requests.get(resource['url']).content)

@@ -27,7 +27,7 @@ class Tag(Env, FilterMixin):
         self.available_tags = self._load_list('tag_list')
 
     def print_tags(self):
-        """Lista as etiquetas."""
+        """Imprime as etiquetas."""
         self._print_list("etiquetas", self.available_tags)
 
     def search_by_tag(self, tag: str) -> list:
