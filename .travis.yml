@@ -12,6 +12,6 @@ before_install:
 script:
   - find . -name \*.py -exec pycodestyle --ignore=E402 {} +
   - python -m unittest -v
-  - coverage run -m unittest -v
+  - coverage run -m unittest -v tests/test_*
 after_success:
   - coveralls
