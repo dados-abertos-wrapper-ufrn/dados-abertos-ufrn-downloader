@@ -11,7 +11,7 @@ before_install:
   - pip install --upgrade pip
 script:
   - find . -name \*.py -exec pycodestyle --ignore=E402 {} +
-  - python -m unittest -v
-  - coverage run --source tests -m unittest -v tests/test_*
+#  - python -m unittest -v
+  - coverage run --source=. -m unittest -v
 after_success:
   - coveralls
