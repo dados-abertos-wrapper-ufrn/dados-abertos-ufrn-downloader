@@ -32,6 +32,7 @@ class Package(unittest.TestCase):
             shutil.rmtree('./tmp')
 
     def test_can_download_packages(self):
+        """Verifica se baixa-se arquivos de um pacote"""
         self.ufrn_data.download_packages(
             ['telefones', 'unidades-academicas'], './tmp'
         )
@@ -61,3 +62,12 @@ class Package(unittest.TestCase):
                 'asudsada', True, True
             )
         )
+
+    def test_can_download_packages_filtering_years(self):
+        """Verifica se baixa-se pacote filtrando por anos"""
+        self.ufrn_data.download_package('discentes', './tmp', years=[2018])
+        _, _, files = next(os.walk('./tmp/discentes'))
+        file_exist = os.path.exists('./tmp/discentes/Ingressantes em 2018.csv')
+        self.assertTrue(len(files) > 0 and file_exist)
+        if os.path.exists('./tmp'):
+            shutil.rmtree('./tmp')
