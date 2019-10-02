@@ -2,6 +2,8 @@ Pipfile
 Pipfile.lock
 .vscode/*
 .idea/*
+.pytest_cache/*
+tests/*
 venv/*
 dist/*
 build/*
