@@ -20,7 +20,7 @@ class Env(ABC):
     MSG_ERRORS = {
         'download_error': (
             "Ocorreu algum erro durante o download do pacote."
-            "Verifique sua conexão, o nome do conjunto de dados"
+            "Verifique sua conexão, o nome do conjunto de dados "
             "e tente novamente."
         ),
         'none_package': 'Nenhum pacote foi encontrado',
