@@ -1,26 +1,26 @@
 import os
 import json
+import pprint
 import shutil
 from .utils import *
 
 
 class Env(unittest.TestCase):
     def setUp(self):
-        """ Inicia novo objeto em todo os testes """
+        """ Inicia novo objeto em todos os testes """
         self.ufrn_data = ODUFRNDownloader()
         self.test_dir = 'temporary_test_dir'
 
     def test_can_print_exception(self):
         """ Verifica se uma exceção consegue ser printada no console """
-        assert_console(lambda: self.ufrn_data._print_exception(ValueError()))
+        assert_console(lambda: self.ufrn_data._print_exception(ValueError()),"\033[91mValueError\033[0m\nOcorreu algum erro durante o download do pacote.Verifique sua conexão, o nome do conjunto de dados e tente novamente.")
 
-    def test_can_print_list(self):
+    def test_can_print_group_list(self):
         """ Verifica se consegue-se printar informação da lista no console """
         assert_console(
             lambda: self.ufrn_data._print_list(
-                "conjuntos de dados", ['discente']
-            )
-        )
+                "grupos de dados", ['discente']
+            ),"Os grupos de dados disponíveis são:\n['discente']\n")
 
     def test_can_load_list(self):
         """ Verifica se consegue carregar uma lista advinda de requisição """
