@@ -16,12 +16,6 @@ def input_value(fun):
     sys.stdout = sys.__stdout__
     return capturedOutput.getvalue()
 
-# def assert_console(fun):
-#     """Recebe função que printa algo na tela e realiza assert
-#     que verifica se foi printado."""
-#     unit = unittest.TestCase()
-#     return unit.assertTrue(len(input_value(fun)) > 0)
-
 def assert_console(fun, message:str):
     """Recebe função que printa algo na tela e realiza assert
     que verifica se foi printado."""

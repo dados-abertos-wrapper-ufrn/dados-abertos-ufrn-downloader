@@ -34,7 +34,6 @@ class Env(ABC):
     def _print_exception(self, ex: Exception,
                          msg: str = MSG_ERRORS['download_error']):
         """Imprime mensagem padrão para exceções."""
-        # print('\033[91m{}\033[0m'.format(ex))
         print('\n\033[91m{}\033[0m'.format(type(ex).__name__))
         print(msg)
 
