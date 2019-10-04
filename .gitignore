@@ -2,6 +2,7 @@ Pipfile
 Pipfile.lock
 .vscode/*
 .idea/*
+.tmp/*
 .pytest_cache/*
 tests/discentes*
 tests/main.py
