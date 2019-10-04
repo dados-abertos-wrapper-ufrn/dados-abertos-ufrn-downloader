@@ -3,16 +3,16 @@ import json
 import shutil
 from .utils import *
 
-
 class Env(unittest.TestCase):
     def setUp(self):
         """ Inicia novo objeto em todos os testes """
         self.ufrn_data = ODUFRNDownloader()
         self.test_dir = 'temporary_test_dir'
 
+    #-m unittest test_env.Env.test_can_print_exception
     def test_can_print_exception(self):
         """ Verifica se uma exceção consegue ser printada no console """
-        assert_console(lambda: self.ufrn_data._print_exception(ValueError()),"\033[91mValueError\033[0m\nOcorreu algum erro durante o download do pacote.Verifique sua conexão, o nome do conjunto de dados e tente novamente.")
+        assert_console(lambda: self.ufrn_data._print_exception(ValueError()),"\033[91mValueError\033[0m\nOcorreu algum erro durante o download do pacote.Verifique sua conexão, o nome do conjunto de dados e tente novamente.\n")
 
     def test_can_print_group_list(self):
         """ Verifica se consegue-se printar informação da lista no console """

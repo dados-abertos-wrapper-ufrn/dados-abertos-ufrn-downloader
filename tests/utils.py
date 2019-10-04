@@ -20,4 +20,4 @@ def assert_console(fun, message:str):
     """Recebe função que printa algo na tela e realiza assert
     que verifica se foi printado."""
     unit = unittest.TestCase()
-    return unit.assertEqual(input_value(fun),message)
+    return unit.assertEqual(message,input_value(fun))
