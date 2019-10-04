@@ -38,7 +38,7 @@ class Env(ABC):
         print(msg)
 
     def _print_not_found(self, name: str, type_name: str):
-        """Imprime mensagem padrão para nome de dados não encontrados.
+        """Imprime mensagem padrão para nomes de dados não encontrados.
         """
         print('{} de dados "{}" não foi encontrado.'.format(type_name, name))
 
