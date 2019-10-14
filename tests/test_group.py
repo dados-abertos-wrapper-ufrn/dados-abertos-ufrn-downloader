@@ -8,7 +8,8 @@ class Group(unittest.TestCase):
 
     def test_can_print_groups(self):
         """Verifica se a lista de grupos é impressa na tela """
-        assert_console(self.ufrn_data.print_groups,"""Os grupos de dados disponíveis são:
+        assert_console(self.ufrn_data.print_groups,
+                       """Os grupos de dados disponíveis são:
 [   'biblioteca',
     'comunicados-e-documentos',
     'contratos-e-convenios',
@@ -72,9 +73,9 @@ class Group(unittest.TestCase):
 
     def test_can_print_files_from_group(self):
         """Verifica se os arquivos de um grupo podem ser impresso na tela."""
-        #Uma vez que os arquivos não são estáticos
-        #e que a extensão de alguns pode mudar, não seria
-        #dinâmico fazer esse assert com mensagem especificada (message!=None)
+        # Uma vez que os arquivos não são estáticos
+        # e que a extensão de alguns pode mudar, não seria
+        # dinâmico fazer esse assert com mensagem especificada (message!=None)
         assert_console(
             lambda: self.ufrn_data.print_files_from_group('processos')
         )
@@ -82,7 +83,8 @@ class Group(unittest.TestCase):
     def test_can_print_files_from_group_with_typo(self):
         """Verifica se o tratamento de erro com o Levenshtein funciona."""
         assert_console(
-            lambda: self.ufrn_data.print_files_from_package('process'),"""[91mTypeError[0m
+            lambda: self.ufrn_data.print_files_from_package('process'),
+            """[91mTypeError[0m
 
 Você pode estar procurando por processos ou processos-seletivos\n"""
         )

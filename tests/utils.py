@@ -22,7 +22,7 @@ def assert_console(fun, message: str = None):
     """Recebe função que printa algo na tela e realiza assert
     que verifica se foi printado."""
     unit = unittest.TestCase()
-    if message!=None:
+    if message is not None:
         return unit.assertEqual(message, input_value(fun))
     else:
         return unit.assertTrue(len(input_value(fun)) > 0)
