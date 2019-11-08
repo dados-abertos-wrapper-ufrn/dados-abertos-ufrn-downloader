@@ -20,7 +20,7 @@ class Env(ABC):
     MSG_ERRORS = {
         'download_error': (
             "Ocorreu algum erro durante o download do pacote."
-            "Verifique sua conexão, o nome do conjunto de dados"
+            "Verifique sua conexão, o nome do conjunto de dados "
             "e tente novamente."
         ),
         'none_package': 'Nenhum pacote foi encontrado',
@@ -34,11 +34,11 @@ class Env(ABC):
     def _print_exception(self, ex: Exception,
                          msg: str = MSG_ERRORS['download_error']):
         """Imprime mensagem padrão para exceções."""
-        print('\033[91m{}\033[0m'.format(ex))
+        print('\033[91m{}\033[0m'.format(type(ex).__name__))
         print(msg)
 
     def _print_not_found(self, name: str, type_name: str):
-        """Imprime mensagem padrão para nome de dados não encontrados.
+        """Imprime mensagem padrão para nomes de dados não encontrados.
         """
         print('{} de dados "{}" não foi encontrado.'.format(type_name, name))
 

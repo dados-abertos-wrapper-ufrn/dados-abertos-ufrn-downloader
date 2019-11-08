@@ -3,9 +3,10 @@ import os
 import sys
 import shutil
 import unittest
-from os.path import dirname, join, abspath
-sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 from odufrn_downloader import ODUFRNDownloader
+from os.path import dirname, join, abspath
+
+sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
 
 def input_value(fun):
@@ -17,8 +18,11 @@ def input_value(fun):
     return capturedOutput.getvalue()
 
 
-def assert_console(fun):
+def assert_console(fun, message: str = None):
     """Recebe função que printa algo na tela e realiza assert
     que verifica se foi printado."""
     unit = unittest.TestCase()
-    return unit.assertTrue(len(input_value(fun)) > 0)
+    if message is not None:
+        return unit.assertEqual(message, input_value(fun))
+    else:
+        return unit.assertTrue(len(input_value(fun)) > 0)

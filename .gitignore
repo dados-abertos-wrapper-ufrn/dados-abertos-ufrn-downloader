@@ -3,6 +3,11 @@ Pipfile.lock
 env/
 .vscode/*
 .idea/*
+.tmp/*
+.tmp
+.pytest_cache/*
+tests/discentes*
+tests/main.py
 venv/*
 dist/*
 build/*
